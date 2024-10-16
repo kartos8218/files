@@ -1,0 +1,27 @@
+document.addEventListener("DOMContentLoaded",init,false);function init(){if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").then((reg)=>{console.log("Service worker registered -->",reg);},(err)=>{console.error("Service worker not registered -->",err);});}}
+const input=document.getElementById("url"),paste=document.getElementById("paste"),clear=document.getElementById("clear");var copyBtn=document.getElementById("btn-copy");function getShortcode(url){let shortcode;if(url==""){shortcode="";}else{const fixed_url=url.split("?");const newUrl=fixed_url[0];const dataArray=newUrl.split("/");shortcode=dataArray[dataArray.length-1]||dataArray[dataArray.length-2];}
+return shortcode;}
+function generateLink(){const link=form.url.value;const newLink="https://www.instagram.com/graphql/query?query_hash=2b0673e0dc4580674a88d426fe00ea90&variables={%22shortcode%22:%22"+
+getShortcode(link)+
+"%22}";form.instaLink.value=newLink;var userAgent=navigator.userAgent;var isChromeAndroid=/Chrome/.test(userAgent)&&/Android/.test(userAgent);if(isChromeAndroid){document.getElementById("newtablink").style.display="none";}
+document.getElementById("newtablink").href=newLink;document.getElementById("newtablink").removeAttribute("disabled");}
+if(copyBtn){copyBtn.addEventListener("click",function(event){event.preventDefault();var copyText=document.getElementById("instaLink");copyText.select();copyText.setSelectionRange(0,99999);navigator.clipboard.writeText(copyText.value);});}
+function onPaste(){navigator.clipboard.readText().then(function(e){""!=e?((input.value=e),(paste.style.display="none"),(clear.style.display="flex")):((document.getElementById("alert").innerHTML="Link is empty."),(document.getElementById("alert").style.display="block"));});}
+function onClear(){(input.value=""),navigator.clipboard&&(paste.style.display="flex"),(clear.style.display="none");}
+navigator.clipboard&&(paste.style.display="flex"),input.addEventListener("keyup",function(e){input.value.length>0?((paste.style.display="none"),(clear.style.display="flex")):(navigator.clipboard&&(paste.style.display="flex"),(clear.style.display="none")),(document.getElementById("alert").style.display="none");});var modal=document.getElementById("dlModal"),btnClose=document.getElementById("closeModalBtn");function showAd(){window.scrollTo({behavior:"smooth",left:0,top:0,});document.getElementsByTagName("BODY")[0].classList.add("modal-open"),(modal.style.display="flex"),(document.getElementById("ad-content").innerHTML='<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3431515959726658" data-ad-slot="5905334691" data-ad-format="auto" data-full-width-responsive="true"></ins>'),(adsbygoogle=window.adsbygoogle||[]).push({});}
+(btnClose.onclick=function(){(modal.style.display="none"),document.getElementsByTagName("BODY")[0].classList.remove("modal-open");}),(window.onclick=function(a){a.target==modal&&((modal.style.display="none"),document.getElementsByTagName("BODY")[0].classList.remove("modal-open"));});function toggleNav(nav){var id=nav.getAttribute("data-target").replace("#","");document.getElementById(id).classList.toggle("in");}
+function dropdown(element){element.parentNode.classList.toggle("open");}
+var form=document.forms.namedItem("formurl");var loader=document.querySelector("#loader");var alertBox=document.getElementById("alert");function pushAlert(j){window.location=window.location.href+"?error="+j;}
+function hiddenAlert(){alertBox.style.display="none";alertBox.innerHTML="";}
+function removeParams(){const url=window.location.href.split("?")[0];window.history.pushState("",document.title,url);}
+form.addEventListener("submit",function(ev){try{removeParams();if(form.html===undefined&&form.url.value==""){pushAlert(lang.LinkEmpty);}
+{var params="url="+form.url.value+"&lang="+document.documentElement.lang;if(!(form.html===undefined)){params+="&html="+encodeURIComponent(form.html.value);}
+loader.style.display="block";loader.scrollIntoView({behavior:"smooth",block:"end",inline:"nearest",});var httpReq=new XMLHttpRequest();httpReq.open("POST",form.attributes.action.value,true);httpReq.setRequestHeader("Content-Type","application/x-www-form-urlencoded");httpReq.onreadystatechange=function(oEvent){if(httpReq.readyState===4){if(httpReq.status===200){insertAndExecute("js-result","<scri"+
+"pt type='text/javascript'>"+
+httpReq.response+
+'history.pushState({}, null, "download");</scr'+
+"ipt>");}else{pushAlert(lang.somethingWrong);}}};httpReq.send(params);}}catch(error){console.log(error);pushAlert(lang.somethingWrong);}
+ev.preventDefault();},false);function insertAndExecute(id,text){domelement=document.getElementById(id);domelement.innerHTML=text;var scripts=[];ret=domelement.childNodes;for(var i=0;ret[i];i++){if(scripts&&nodeName(ret[i],"script")&&(!ret[i].type||ret[i].type.toLowerCase()==="text/javascript")){scripts.push(ret[i].parentNode?ret[i].parentNode.removeChild(ret[i]):ret[i]);}}
+for(script in scripts){evalScript(scripts[script]);}}
+function nodeName(elem,name){return elem.nodeName&&elem.nodeName.toUpperCase()===name.toUpperCase();}
+function evalScript(elem){data=elem.text||elem.textContent||elem.innerHTML||"";var head=document.getElementsByTagName("head")[0]||document.documentElement,script=document.createElement("script");script.type="text/javascript";script.appendChild(document.createTextNode(data));head.insertBefore(script,head.firstChild);head.removeChild(script);if(elem.parentNode){elem.parentNode.removeChild(elem);}}
