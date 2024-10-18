@@ -194,12 +194,7 @@ function handleSuccessResponse(data, inputUrl) {
 
         // Construct video HTML
        const videoHtml = `
-  <video style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:220x; height:auto; border-radius:17px;aspect-ratio:9/16;' 
-         poster='${thumbnailUrl}' autoplay muted playsinline loop>
-      <source src='https://inv.nadeko.net/latest_version?id=${videoId}&itag=18&local=true' type='video/mp4'>
-      <source src='https://cors-tube.vercel.app/?url=https://invidious.jing.rocks/latest_version?id=${videoId}&itag=18&local=true' type='video/mp4'>
-      ${downloadUrls.map(url => `<source src='${url}' type='video/mp4'>`).join('')}
-  </video>`;
+  <img style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:220x; height:auto; border-radius:17px;aspect-ratio:9/16;'/>`;
 
 // Insert the video into your desired element
 document.getElementById('thumb').innerHTML = videoHtml;
