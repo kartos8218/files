@@ -177,6 +177,10 @@ function displayError(message) {
  */
 function handleSuccessResponse(data, inputUrl) {
     document.getElementById("container").style.display = "inline-flex";
+    document.getElementById("container").style.display = "inline-flex";
+    document.getElementById("container").style.gap = "30px";
+    document.getElementById("container").style.justifyContent = "space-evenly";
+    document.getElementById("container").style.width = "100%";
     document.getElementById("loading").style.display = "none";
 
     if (data.data) {
@@ -192,9 +196,6 @@ function handleSuccessResponse(data, inputUrl) {
         const videoHtml = `
             <video style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:100%; height:500px; border-radius:20px;' 
                    poster='${thumbnailUrl}' autoplay controls playsinline>
-                <source src='https://inv.nadeko.net/latest_version?id=${videoId}&itag=18&local=true' type='video/mp4'>
-                <source src='https://cors-tube.vercel.app/?url=https://invidious.jing.rocks/latest_version?id=${videoId}&itag=18&local=true' type='video/mp4'>
-                ${downloadUrls.map(url => `<source src='${url}' type='video/mp4'>`).join('')}
             </video>`;
         const titleHtml = videoData.title ? `<h3>${sanitizeContent(videoData.title)}</h3>` : "";
         const descriptionHtml = videoData.description ? `<h4><details><summary>View Description</summary>${sanitizeContent(videoData.description)}</details></h4>` : "";
