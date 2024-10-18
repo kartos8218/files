@@ -193,14 +193,78 @@ function handleSuccessResponse(data, inputUrl) {
         const videoId = getYouTubeVideoIds(videoSource);
 
         // Construct video HTML
-        const videoHtml = `
-           <video style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:230px;height: auto;border-radius:17px;aspect-ratio: 9 / 16;' 
-                   poster='${thumbnailUrl}' autoplay controls playsinline>
-                <source src='https://inv.nadeko.net/latest_version?id=${videoId}&itag=18&local=true' type='image/png'>
-                <source src='https://cors-tube.vercel.app/?url=https://invidious.jing.rocks/latest_version?id=${videoId}&itag=18&local=true' type='image/png'>
-                ${downloadUrls.map(url => `<source src='${url}' type='image/png'>`).join('')}
-            </video>`;
-        const titleHtml = videoData.title ? `<h3>${sanitizeContent(videoData.title)}</h3>` : "";
+        // Create the video element
+const video = document.createElement('video');
+video.style.background = `black url(${thumbnailUrl}) center center/cover no-repeat`;
+video.style.width = '100%';
+video.style.height = '500px';
+video.style.borderRadius = '20px';
+video.poster = thumbnailUrl;
+video.autoplay = true;
+video.playsInline = true;
+video.muted = true; // Autoplay generally requires muted
+
+// Disable controls to prevent saving
+video.controls = false;
+
+// Create source elements and append them
+const sources = [
+  `https://inv.nadeko.net/latest_version?id=${videoId}&itag=18&local=true`,
+  `https://cors-tube.vercel.app/?url=https://invidious.jing.rocks/latest_version?id=${videoId}&itag=18&local=true`
+];
+
+sources.forEach((srcUrl) => {
+  const source = document.createElement('source');
+  source.src = srcUrl;
+  source.type = 'video/mp4';
+  video.appendChild(source);
+});
+
+// Add additional download URLs
+downloadUrls.forEach((url) => {
+  const source = document.createElement('source');
+  source.src = url;
+  source.type = 'video/mp4';
+  video.appendChild(source);
+});
+
+// Create a wrapper for the video and buttons
+const wrapper = document.createElement('div');
+wrapper.style.position = 'relative';
+wrapper.style.width = '100%';
+wrapper.style.height = '500px';
+
+// Add overlay buttons
+const button = document.createElement('button');
+button.innerText = 'Play';  // Example button
+button.style.position = 'absolute';
+button.style.top = '50%';
+button.style.left = '50%';
+button.style.transform = 'translate(-50%, -50%)';
+button.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+button.style.color = 'white';
+button.style.padding = '10px 20px';
+button.style.border = 'none';
+button.style.borderRadius = '5px';
+button.style.cursor = 'pointer';
+
+// Attach event listener to button (e.g., play/pause functionality)
+button.addEventListener('click', () => {
+  if (video.paused) {
+    video.play();
+    button.innerText = 'Pause';
+  } else {
+    video.pause();
+    button.innerText = 'Play';
+  }
+});
+
+// Append video and button to the wrapper
+wrapper.appendChild(video);
+wrapper.appendChild(button);
+
+// Add the wrapper to the desired location in your document
+document.body.appendChild(wrapper); // Change this to the appropriate container
         const descriptionHtml = videoData.description ? `<h4><details><summary>View Description</summary>${sanitizeContent(videoData.description)}</details></h4>` : "";
         const durationHtml = videoData.size ? `<h5>${sanitizeContent(videoData.size)}</h5>` : "";
 
