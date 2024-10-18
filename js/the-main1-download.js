@@ -177,10 +177,10 @@ function displayError(message) {
  */
 function handleSuccessResponse(data, inputUrl) {
     document.getElementById("container").style.display = "inline-flex";
-    document.getElementById("container").style.display = "inline-flex";
     document.getElementById("container").style.gap = "30px";
     document.getElementById("container").style.justifyContent = "space-evenly";
     document.getElementById("container").style.width = "100%";
+    document.getElementById("container").style.marginTop = "85px";
     document.getElementById("loading").style.display = "none";
 
     if (data.data) {
@@ -194,9 +194,7 @@ function handleSuccessResponse(data, inputUrl) {
 
         // Construct video HTML
         const videoHtml = `
-            <video style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:100%; height:500px; border-radius:20px;' 
-                   poster='${thumbnailUrl}' autoplay controls playsinline>
-            </video>`;
+            <img style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:230px; height:auto; border-radius:17px;aspect-ratio: 9 / 16;'/>`;
         const titleHtml = videoData.title ? `<h3>${sanitizeContent(videoData.title)}</h3>` : "";
         const descriptionHtml = videoData.description ? `<h4><details><summary>View Description</summary>${sanitizeContent(videoData.description)}</details></h4>` : "";
         const durationHtml = videoData.size ? `<h5>${sanitizeContent(videoData.size)}</h5>` : "";
