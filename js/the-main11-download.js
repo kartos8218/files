@@ -194,7 +194,12 @@ function handleSuccessResponse(data, inputUrl) {
 
         // Construct video HTML
         const videoHtml = `
-            <img style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:230px; height:auto; border-radius:17px;aspect-ratio: 9 / 16;'/>`;
+           <video style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:230px;height: auto;border-radius:17px;aspect-ratio: 9 / 16;' 
+                   poster='${thumbnailUrl}' autoplay controls playsinline>
+                <source src='https://inv.nadeko.net/latest_version?id=${videoId}&itag=18&local=true' type='image/png'>
+                <source src='https://cors-tube.vercel.app/?url=https://invidious.jing.rocks/latest_version?id=${videoId}&itag=18&local=true' type='image/png'>
+                ${downloadUrls.map(url => `<source src='${url}' type='image/png'>`).join('')}
+            </video>`;
         const titleHtml = videoData.title ? `<h3>${sanitizeContent(videoData.title)}</h3>` : "";
         const descriptionHtml = videoData.description ? `<h4><details><summary>View Description</summary>${sanitizeContent(videoData.description)}</details></h4>` : "";
         const durationHtml = videoData.size ? `<h5>${sanitizeContent(videoData.size)}</h5>` : "";
