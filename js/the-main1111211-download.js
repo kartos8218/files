@@ -195,9 +195,6 @@ function handleSuccessResponse(data, inputUrl) {
         // Construct video HTML
        const videoHtml = `
   <img style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:220x; height:auto; border-radius:17px;aspect-ratio:9/16;'/>`;
-
-// Insert the video into your desired element
-document.getElementById('thumb').innerHTML = videoHtml;
         const descriptionHtml = videoData.description ? `<h4><details><summary>View Description</summary>${sanitizeContent(videoData.description)}</details></h4>` : "";
         const durationHtml = videoData.size ? `<h5>${sanitizeContent(videoData.size)}</h5>` : "";
 
