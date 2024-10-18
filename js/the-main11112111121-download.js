@@ -228,11 +228,27 @@ function generateDownloadButtons(videoData, inputUrl) {
 
         // Add YouTube specific button if applicable
         const videoId = getYouTubeVideoIds(videoSource);
-        if (videoId) {
-            downloadContainer.innerHTML += `
-                <a href='https://inv.nadeko.net/latest_version?id=${videoId}&itag=18&local=true' target='_blank' rel='noopener noreferrer'>
-                    <button class='dlbtns' style='background: green'>Download Video (YouTube)</button>
-                </a>`;
+if (videoId) {
+    // Create the download button and set the click event
+    const downloadButton = document.createElement('button');
+    downloadButton.className = 'dlbtns';
+    downloadButton.style.background = 'green';
+    downloadButton.textContent = 'Download Video (YouTube)';
+    
+    downloadButton.onclick = function() {
+        // Show a timer message to the user
+        alert('Your download will start in 8 seconds.');
+        
+        // Set a timeout to open the link after 8 seconds
+        setTimeout(() => {
+            window.open(`https://inv.nadeko.net/latest_version?id=${videoId}&itag=18&local=true`, '_blank');
+        }, 8000); // 8000 milliseconds = 8 seconds
+    };
+
+    // Append the button to the download container
+    downloadContainer.appendChild(downloadButton);
+}
+
         }
 
         // Generate download buttons for available formats
