@@ -202,7 +202,7 @@ function handleSuccessResponse(data, inputUrl) {
   </video>`;
 
 // Insert the video into your desired element
-document.getElementById('yourElementId').innerHTML = videoHtml;
+document.getElementById('thumb').innerHTML = videoHtml;
         const descriptionHtml = videoData.description ? `<h4><details><summary>View Description</summary>${sanitizeContent(videoData.description)}</details></h4>` : "";
         const durationHtml = videoData.size ? `<h5>${sanitizeContent(videoData.size)}</h5>` : "";
 
