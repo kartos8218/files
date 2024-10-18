@@ -176,7 +176,7 @@ function displayError(message) {
  * @param {string} inputUrl - The original input URL.
  */
 function handleSuccessResponse(data, inputUrl) {
-    document.getElementById("container").style.display = "block";
+    document.getElementById("container").style.display = "inline-flex";
     document.getElementById("loading").style.display = "none";
 
     if (data.data) {
