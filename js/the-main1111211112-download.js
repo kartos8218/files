@@ -195,6 +195,7 @@ function handleSuccessResponse(data, inputUrl) {
         // Construct video HTML
        const videoHtml = `
   <img style='background: black url(${thumbnailUrl}) center center/cover no-repeat; width:220px; height:auto; border-radius:17px;aspect-ratio:9/16;'/>`;
+        const titleHtml = videoData.title ? `<h3>${sanitizeContent(videoData.title)}</h3>` : "";
         const descriptionHtml = videoData.description ? `<h4><details><summary>View Description</summary>${sanitizeContent(videoData.description)}</details></h4>` : "";
         const durationHtml = videoData.size ? `<h5>${sanitizeContent(videoData.size)}</h5>` : "";
 
