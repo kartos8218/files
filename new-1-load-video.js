@@ -168,6 +168,7 @@ const a0_0x5cee06 = a0_0x5c76;
                                                         videoElement[_0x55a19c(0x11d)](_0x55a19c(0x10b), ''),
                                                         videoElement[_0x55a19c(0x11d)](_0x55a19c(0x13d), _0x55a19c(0xe3)),
                                                         videoElement[_0x55a19c(0x11d)](_0x55a19c(0xb0), _0x5d37f8),
+                                                        console.log('Video element created:', videoElement), // Add debug logging
                                                         sourceElement = document[_0x55a19c(0x138)](_0x55a19c(0xcd));
                                                     const _0x4ffb49 = {
                                                             'shareid': _0x2bbdde,
